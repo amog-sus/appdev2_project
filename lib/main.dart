@@ -1,3 +1,4 @@
+import 'package:appdev_project/country.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:path/path.dart';
@@ -598,6 +599,7 @@ class MapOfEuropeNorway extends StatefulWidget {
 }
 
 class _MapOfEuropeNorwayState extends State<MapOfEuropeNorway> {
+  Country c = Country("Norway", "Oslo", "https://media.discordapp.net/attachments/1096092608415137792/1103513431174299728/image_1.png?width=333&height=592", Price.high, Temperature.cold, List.of([Language("Norwegian"), Language("English")]));
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -640,7 +642,7 @@ class _MapOfEuropeNorwayState extends State<MapOfEuropeNorway> {
                       size: 26.0,
                     ),
                     Text(
-                      'Oslo, Norway',
+                      '${c.capital}, ${c.name}',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 18.0,
@@ -755,6 +757,8 @@ class LocationInfoPage extends StatefulWidget {
 }
 
 class _LocationInfoPageState extends State<LocationInfoPage> {
+  Country c = Country("Norway", "Oslo", "https://media.discordapp.net/attachments/1096092608415137792/1103513431174299728/image_1.png?width=333&height=592", Price.high, Temperature.cold, List.of([Language("Norwegian"), Language("English")]));
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -790,7 +794,7 @@ class _LocationInfoPageState extends State<LocationInfoPage> {
                       ),
                     ),
                     Text(
-                      'Oslo is the capital of Norway',
+                      '${c.capital} is the capital of ${c.name}',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20.0,
@@ -846,7 +850,7 @@ class _LocationInfoPageState extends State<LocationInfoPage> {
                       ),
                     ),
                     Text(
-                      'Oslo is very expensive',
+                      'Price: ${"\$" * (c.price.index + 1)}',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20.0,
@@ -874,7 +878,7 @@ class _LocationInfoPageState extends State<LocationInfoPage> {
                       ),
                     ),
                     Text(
-                      'Norwegian, English',
+                      c.languages.map((e) => e.name).toList().join(", "),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20.0,
@@ -902,7 +906,7 @@ class _LocationInfoPageState extends State<LocationInfoPage> {
                       ),
                     ),
                     Text(
-                      'Oslo is usually cold',
+                      '${c.capital} is usually ${c.temperature.name}',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20.0,

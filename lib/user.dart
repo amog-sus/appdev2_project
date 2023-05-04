@@ -25,7 +25,7 @@ class User {
   }
 
   Map<String, dynamic> toMap() {
-    Passport passport = Passport(user_id, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
+    Passport passport = Passport(user_id, List.empty(growable: true));
     return {
       DatabaseHelper.columnId: user_id,
       DatabaseHelper.columnFirstName: first_name,
