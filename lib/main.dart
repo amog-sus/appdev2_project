@@ -418,9 +418,12 @@ class _ProfilePageState extends State<ProfilePage> {
                 margin: EdgeInsets.only(bottom: 10.0),
                 child: Align(
                   alignment: FractionalOffset.bottomCenter,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text('Edit Information'),
+                  child: Container(
+                    width: 200,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: Text('Edit Information'),
+                    ),
                   ),
                 ),
               ),
@@ -655,7 +658,7 @@ class _MapOfEuropeNorwayState extends State<MapOfEuropeNorway> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => MapOfEuropeNorway()),
+                            MaterialPageRoute(builder: (context) => LocationInfoPage()),
                           );
                         },
                         child: Text(
@@ -733,6 +736,215 @@ class _MapOfEuropeNorwayState extends State<MapOfEuropeNorway> {
                         MaterialPageRoute(builder: (context) => MainPage()),
                       );
                     },
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class LocationInfoPage extends StatefulWidget {
+  const LocationInfoPage({Key? key}) : super(key: key);
+
+  @override
+  State<LocationInfoPage> createState() => _LocationInfoPageState();
+}
+
+class _LocationInfoPageState extends State<LocationInfoPage> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Location Information',
+      theme: new ThemeData(
+          primarySwatch: Colors.blueGrey,
+          scaffoldBackgroundColor: const Color(0xFF887CA3)
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Location Information'),
+          centerTitle: true,
+        ),
+        body: Center(
+          child: Column(
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white),
+                  color: Colors.blueGrey,
+                ),
+                width: 330,
+                height: 50,
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.all(8),
+                      child: Icon(
+                        Icons.location_on_outlined,
+                        color: Colors.white,
+                        size: 28.0,
+                      ),
+                    ),
+                    Text(
+                      'Oslo is the capital of Norway',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white),
+                  color: Colors.blueGrey,
+                ),
+                width: 330,
+                height: 50,
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.all(8),
+                      child: Icon(
+                        Icons.access_time_rounded,
+                        color: Colors.white,
+                        size: 28.0,
+                      ),
+                    ),
+                    Text(
+                      'GMT +2',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white),
+                  color: Colors.blueGrey,
+                ),
+                width: 330,
+                height: 50,
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.all(8),
+                      child: Icon(
+                        Icons.euro,
+                        color: Colors.white,
+                        size: 28.0,
+                      ),
+                    ),
+                    Text(
+                      'Oslo is very expensive',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white),
+                  color: Colors.blueGrey,
+                ),
+                width: 330,
+                height: 50,
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.all(8),
+                      child: Icon(
+                        Icons.language,
+                        color: Colors.white,
+                        size: 28.0,
+                      ),
+                    ),
+                    Text(
+                      'Norwegian, English',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white),
+                  color: Colors.blueGrey,
+                ),
+                width: 330,
+                height: 50,
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.all(8),
+                      child: Icon(
+                        Icons.cloud,
+                        color: Colors.white,
+                        size: 28.0,
+                      ),
+                    ),
+                    Text(
+                      'Oslo is usually cold',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Container(
+                    height: 150,
+                    child: Image(
+                        image: AssetImage('assets/images/oslo2.png')
+                    ),
+                  ),
+                  Container(
+                    height: 150,
+                    child: Image(
+                        image: AssetImage('assets/images/oslo3.png')
+                    ),
+                  ),
+                ],
+              ),
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.only(bottom: 10.0),
+                  child: Align(
+                    alignment: FractionalOffset.bottomCenter,
+                    child: Container(
+                      width: 200,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MapOfEuropeNorway()),
+                          );
+                        },
+                        child: Text('Back'),
+                      ),
+                    ),
                   ),
                 ),
               ),

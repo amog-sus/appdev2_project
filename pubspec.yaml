@@ -58,6 +58,8 @@ flutter:
     - assets/images/yelan.png
     - assets/images/map.png
     - assets/images/oslo1.png
+    - assets/images/oslo2.png
+    - assets/images/oslo3.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
