@@ -15,16 +15,18 @@ class ExploreEurope extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Explore Europle',
+      title: 'Explore Europe',
       theme: ThemeData(
           primarySwatch: Colors.blueGrey,
           textButtonTheme: TextButtonThemeData(
-              style: TextButton.styleFrom(backgroundColor: Color(0xFF4F6A84))),
+              style: TextButton.styleFrom(backgroundColor: Color(0xFF4F6A84))
+          ),
           inputDecorationTheme: InputDecorationTheme(
             fillColor: Color(0xFF4F6A84),
             filled: true,
-          )),
-      home: LoginPage(),
+          ),
+      ),
+      home: MainPage(),
     );
   }
 }
@@ -40,47 +42,59 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          title: Text("Welcome!"),
-        ),
-        body: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image: Image.network(
-                          "https://media.discordapp.net/attachments/1096092608415137792/1103513431174299728/image_1.png")
-                      .image)),
-          child: Center(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.6,
-                ),
-                TextButton(
-                    onPressed: () {
-                      return;
-                    },
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF4F6A84)),
-                    child: Text(
-                      "Continue Your Adventure!",
-                      style: TextStyle(color: Colors.white60),
-                    )),
-                TextButton(
-                    onPressed: () {
-                      return;
-                    },
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF4F6A84)),
-                    child: Text(
-                      "Start Your Adventure!",
-                      style: TextStyle(color: Colors.white60),
-                    )),
-              ],
-            ),
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        title: Text("Welcome to Explore Europe!"),
+        centerTitle: true,
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                fit: BoxFit.fill,
+                image: Image.network(
+                        "https://media.discordapp.net/attachments/1096092608415137792/1103513431174299728/image_1.png")
+                    .image)),
+        child: Center(
+          child: Column(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.6,
+              ),
+              TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const LoginPage()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF4F6A84)
+                  ),
+                  child: Text(
+                    "Continue Your Adventure!",
+                    style: TextStyle(color: Colors.white60),
+                  ),
+              ),
+              TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const RegisterPage()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF4F6A84)
+                  ),
+                  child: Text(
+                    "Start Your Adventure!",
+                    style: TextStyle(color: Colors.white60),
+                  ),
+              ),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
 
@@ -98,53 +112,63 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          title: Text("Log in"),
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        title: Text("Log in"),
+      ),
+      body: Container(
+        padding: EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              fit: BoxFit.fill,
+              image: Image.network(
+                      "https://media.discordapp.net/attachments/1096092608415137792/1103513431174299728/image_1.png")
+                  .image),
         ),
-        body: Container(
-          padding: EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.fill,
-                image: Image.network(
-                        "https://media.discordapp.net/attachments/1096092608415137792/1103513431174299728/image_1.png")
-                    .image),
-          ),
-          child: Center(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.08,
-                ),
-                TextField(
-                    controller: usernameController,
-                    decoration: InputDecoration(
-                      hintText: "Enter Username",
-                    )),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.03,
-                ),
-                TextField(
-                    controller: passwordController,
-                    decoration: InputDecoration(
-                      hintText: "Enter Password",
-                    )),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.1,
-                ),
-                TextButton(
-                    onPressed: () {
+        child: Center(
+          child: Column(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.08,
+              ),
+              TextField(
+                  controller: usernameController,
+                  decoration: InputDecoration(
+                    hintText: "Enter Username",
+                  ),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.03,
+              ),
+              TextField(
+                  controller: passwordController,
+                  decoration: InputDecoration(
+                    hintText: "Enter Password",
+                  ),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.1,
+              ),
+              TextButton(
+                  onPressed: () {
+                    if (usernameController.text == "norway_lover31" && passwordController.text == "123") {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const ProfilePage()),
+                      );
+                    } else
                       return;
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF4F6A84),
-                    ),
-                    child: Text("Register")),
-              ],
-            ),
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFF4F6A84),
+                  ),
+                  child: Text("Login"),
+              ),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
 
@@ -156,6 +180,10 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final dbHelper = DatabaseHelper.instance;
+
+  List<User> users = [];
+
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController fNameController = TextEditingController();
@@ -180,7 +208,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     .image)),
         child: Center(
           child: Column(
-            children: [
+            children: <Widget>[
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.08,
               ),
@@ -188,7 +216,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: usernameController,
                   decoration: InputDecoration(
                     hintText: "Enter Username",
-                  )),
+                  ),
+              ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.03,
               ),
@@ -196,7 +225,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: passwordController,
                   decoration: InputDecoration(
                     hintText: "Enter Password",
-                  )),
+                  ),
+              ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.08,
               ),
@@ -204,7 +234,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: fNameController,
                   decoration: InputDecoration(
                     hintText: "Enter First Name",
-                  )),
+                  ),
+              ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.03,
               ),
@@ -212,7 +243,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: lNameController,
                   decoration: InputDecoration(
                     hintText: "Enter Last Name",
-                  )),
+                  ),
+              ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.08,
               ),
@@ -220,7 +252,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: bankController,
                   decoration: InputDecoration(
                     hintText: "Your Bank",
-                  )),
+                  ),
+              ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.03,
               ),
@@ -228,23 +261,41 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: accNumController,
                   decoration: InputDecoration(
                     hintText: "Account Number",
-                  )),
+                  ),
+              ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.03,
               ),
               TextButton(
                   onPressed: () {
-                    return;
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const LoginPage()),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFF4F6A84),
                   ),
-                  child: Text("Register")),
+                  child: Text("Register"),
+              ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  void _insert(username, password, first_name, last_name, bank_name, account_num) async {
+    Map<String, dynamic> row = {
+      DatabaseHelper.columnUsername: username,
+      DatabaseHelper.columnPassword: password,
+      DatabaseHelper.columnFirstName: first_name,
+      DatabaseHelper.columnLastName: last_name,
+      DatabaseHelper.columnBankName: bank_name,
+      DatabaseHelper.columnAccountNum: account_num
+    };
+    User user = User.fromMap(row);
+    final id = await dbHelper.insert(user);
   }
 }
 
@@ -399,7 +450,10 @@ class _ProfilePageState extends State<ProfilePage> {
               ListTile(
                 leading: Icon(Icons.map), title: Text('Map of Europe'),
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MapOfEurope()),
+                  );
                 },
               ),
               ListTile(
@@ -413,7 +467,272 @@ class _ProfilePageState extends State<ProfilePage> {
                   alignment: FractionalOffset.bottomCenter,
                   child: ListTile(
                     leading: Icon(Icons.logout), title: Text('Logout'),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MainPage()),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class MapOfEurope extends StatefulWidget {
+  const MapOfEurope({Key? key}) : super(key: key);
+
+  @override
+  State<MapOfEurope> createState() => _MapOfEuropeState();
+}
+
+class _MapOfEuropeState extends State<MapOfEurope> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Profile',
+      theme: new ThemeData(
+          primarySwatch: Colors.blueGrey,
+          scaffoldBackgroundColor: const Color(0xFF887CA3)
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Map of Europe'),
+          centerTitle: true,
+        ),
+        body: Center(
+          child: Column(
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.all(15.0),
+                color: Colors.white70,
+                child: Image(
+                    image: AssetImage('assets/images/map.png')
+                ),
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MapOfEuropeNorway()),
+                    );
+                  },
+                  child: Text(
+                    'Choose a location to begin your next adventure!',
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+              ),
+            ],
+          ),
+        ),
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              UserAccountsDrawerHeader(
+                accountName: Text('Sonia Vetra'),
+                accountEmail: Text('norway_lover31'),
+                currentAccountPicture: CircleAvatar(
+                  backgroundImage: AssetImage('assets/images/yelan.png'),
+                ),
+              ),
+              ListTile(
+                leading: Icon(Icons.person), title: Text('Profile'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProfilePage()),
+                  );
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.map), title: Text('Map of Europe'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MapOfEurope()),
+                  );
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.hiking), title: Text('Past Adventures'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              Expanded(
+                child: Align(
+                  alignment: FractionalOffset.bottomCenter,
+                  child: ListTile(
+                    leading: Icon(Icons.logout), title: Text('Logout'),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MainPage()),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class MapOfEuropeNorway extends StatefulWidget {
+  const MapOfEuropeNorway({Key? key}) : super(key: key);
+
+  @override
+  State<MapOfEuropeNorway> createState() => _MapOfEuropeNorwayState();
+}
+
+class _MapOfEuropeNorwayState extends State<MapOfEuropeNorway> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Profile',
+      theme: new ThemeData(
+          primarySwatch: Colors.blueGrey,
+          scaffoldBackgroundColor: const Color(0xFF887CA3)
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Map of Europe'),
+          centerTitle: true,
+        ),
+        body: Center(
+          child: Column(
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.all(15.0),
+                color: Colors.white70,
+                child: Image(
+                    image: AssetImage('assets/images/map.png')
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(5.0),
+                height: 175,
+                child: Image(
+                    image: AssetImage('assets/images/oslo1.png')
+                ),
+              ),
+              Container(
+                width: 330,
+                height: 40,
+                color: Colors.blueGrey,
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.location_on_outlined,
+                      color: Colors.white,
+                      size: 26.0,
+                    ),
+                    Text(
+                      'Oslo, Norway',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Row(
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(left: 30, right: 5, top: 5, bottom: 5),
+                    child: Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MapOfEuropeNorway()),
+                          );
+                        },
+                        child: Text(
+                          'Location Information',
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 25, right: 5, top: 5, bottom: 5),
+                    child: Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MapOfEuropeNorway()),
+                          );
+                        },
+                        child: Text(
+                          'Book A Stay',
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              UserAccountsDrawerHeader(
+                accountName: Text('Sonia Vetra'),
+                accountEmail: Text('norway_lover31'),
+                currentAccountPicture: CircleAvatar(
+                  backgroundImage: AssetImage('assets/images/yelan.png'),
+                ),
+              ),
+              ListTile(
+                leading: Icon(Icons.person), title: Text('Profile'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProfilePage()),
+                  );
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.map), title: Text('Map of Europe'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MapOfEurope()),
+                  );
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.hiking), title: Text('Past Adventures'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              Expanded(
+                child: Align(
+                  alignment: FractionalOffset.bottomCenter,
+                  child: ListTile(
+                    leading: Icon(Icons.logout), title: Text('Logout'),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MainPage()),
+                      );
+                    },
                   ),
                 ),
               ),

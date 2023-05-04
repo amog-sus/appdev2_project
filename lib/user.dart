@@ -25,6 +25,7 @@ class User {
   }
 
   Map<String, dynamic> toMap() {
+    Passport passport = Passport(user_id, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
     return {
       DatabaseHelper.columnId: user_id,
       DatabaseHelper.columnFirstName: first_name,
@@ -33,7 +34,7 @@ class User {
       DatabaseHelper.columnPassword: password,
       DatabaseHelper.columnBankName: bank_name,
       DatabaseHelper.columnAccountNum: account_num,
-      DatabaseHelper.columnPassport: passport,
+      DatabaseHelper.columnPassport: passport
     };
   }
 }

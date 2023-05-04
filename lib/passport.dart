@@ -49,6 +49,8 @@ class Passport {
 
   Passport(this.pass_id, this.russia, this.germany, this.united_kingdom, this.france, this.italy, this.spain, this.ukraine, this.poland, this.romania, this.netherlands, this.belgium, this.czech_republic, this.greece, this.portugal, this.sweden, this.hungary, this.belarus, this.austria, this.serbia, this.switzerland, this.bulgaria, this.denmark, this.finland, this.slovakia, this.norway, this.ireland, this.croatia, this.moldova, this.bosnia_and_herzegovina, this.albania, this.lithuania, this.north_macedonia, this.slovenia, this.latvia, this.estonia, this.montenegro, this.luxembourg, this.malta, this.iceland, this.andorra, this.monaco, this.liechtenstein, this.san_marino, this.vatican_city);
 
+  Passport.firstPassport(this.russia, this.germany, this.united_kingdom, this.france, this.italy, this.spain, this.ukraine, this.poland, this.romania, this.netherlands, this.belgium, this.czech_republic, this.greece, this.portugal, this.sweden, this.hungary, this.belarus, this.austria, this.serbia, this.switzerland, this.bulgaria, this.denmark, this.finland, this.slovakia, this.norway, this.ireland, this.croatia, this.moldova, this.bosnia_and_herzegovina, this.albania, this.lithuania, this.north_macedonia, this.slovenia, this.latvia, this.estonia, this.montenegro, this.luxembourg, this.malta, this.iceland, this.andorra, this.monaco, this.liechtenstein, this.san_marino, this.vatican_city);
+
   Passport.fromMap(Map<String, dynamic> map) {
     pass_id = map['id'];
     russia = map['russia'];
