@@ -376,6 +376,50 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ],
         ),
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              UserAccountsDrawerHeader(
+                accountName: Text('Sonia Vetra'),
+                accountEmail: Text('norway_lover31'),
+                currentAccountPicture: CircleAvatar(
+                  backgroundImage: AssetImage('assets/images/yelan.png'),
+                ),
+              ),
+              ListTile(
+                leading: Icon(Icons.person), title: Text('Profile'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProfilePage()),
+                  );
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.map), title: Text('Map of Europe'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.hiking), title: Text('Past Adventures'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              Expanded(
+                child: Align(
+                  alignment: FractionalOffset.bottomCenter,
+                  child: ListTile(
+                    leading: Icon(Icons.logout), title: Text('Logout'),
+                    onTap: () {},
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
