@@ -11,14 +11,14 @@ enum Temperature {
 }
 
 class Country {
+  String id;
   String name;
   String capital;
-  String imageUrl;
   Price price;
   Temperature temperature;
   List<Language> languages;
 
-  Country(this.name, this.capital, this.imageUrl, this.price, this.temperature, this.languages);
+  Country(this.id, this.name, this.capital, this.price, this.temperature, this.languages);
 }
 
 class Language {

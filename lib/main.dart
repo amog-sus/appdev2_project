@@ -1,4 +1,6 @@
 import 'package:appdev_project/country.dart';
+import 'package:countries_world_map/countries_world_map.dart';
+import 'package:countries_world_map/data/maps/world_map.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:path/path.dart';
@@ -7,6 +9,7 @@ import 'package:sqflite/sqflite.dart';
 import './user.dart';
 import './passport.dart';
 import './dbhelper.dart';
+import 'country.dart';
 
 void main() => runApp(ExploreEurope());
 
@@ -701,9 +704,23 @@ class MapOfEuropeNorway extends StatefulWidget {
 }
 
 class _MapOfEuropeNorwayState extends State<MapOfEuropeNorway> {
-  Country c = Country("Norway", "Oslo", "https://media.discordapp.net/attachments/1096092608415137792/1103513431174299728/image_1.png?width=333&height=592", Price.high, Temperature.cold, List.of([Language("Norwegian"), Language("English")]));
+  List<Country> countries = [
+    Country("be", "Belgium", "Brussels", Price.medium, Temperature.comfortable, List.of([Language("French"), Language("Dutch"), Language("English")])),
+    Country("se", "Sweden", "Stockholm", Price.high, Temperature.comfortable, List.of([Language("Swedish"), Language("English")])),
+    Country("no", "Norway", "Oslo", Price.high, Temperature.comfortable, List.of([Language("Norwegian"), Language("English")])),
+    Country("fr", "France", "Paris", Price.medium, Temperature.comfortable, List.of([Language("French"), Language("English")])),
+    Country("lv", "Latvia", "Riga", Price.low, Temperature.comfortable, List.of([Language("Latvian"), Language("Russian"), Language("English")])),
+    Country("fi", "Finland", "Helsinki", Price.medium, Temperature.comfortable, List.of([Language("Finnish")])),
+    Country("nl", "Netherlands", "Amsterdam", Price.high, Temperature.comfortable, List.of([Language("Dutch")])),
+    Country("ch", "Switzerland", "Bern", Price.high, Temperature.comfortable, List.of([Language("German"), Language("French")])),
+    Country("hr", "Croatia", "Zagreb", Price.medium, Temperature.comfortable, List.of([Language("Croatian")])),
+    Country("at", "Austria", "Vienna", Price.low, Temperature.comfortable, List.of([Language("German")])),
+  ];
+  String currentId = "se";
+
   @override
   Widget build(BuildContext context) {
+    Country country = countries.firstWhere((element) => element.id == currentId, orElse: () => countries.where((element) => element.id == "no").first);
     return MaterialApp(
       title: 'Profile',
       theme: new ThemeData(
@@ -721,9 +738,50 @@ class _MapOfEuropeNorwayState extends State<MapOfEuropeNorway> {
               Container(
                 margin: EdgeInsets.all(15.0),
                 color: Colors.white70,
-                child: Image(
-                    image: AssetImage('assets/images/map.png')
-                ),
+                child: InteractiveViewer(
+                  scaleEnabled: true,
+                  maxScale: 75,
+                  minScale: 5,
+                  child: SimpleMap(instructions: SMapWorld.instructions,
+                    colors: SMapWorldColors(
+                      bE: Colors.green,
+                      // bG: Colors.green,
+                      // cZ: Colors.green,
+                      // dK: Colors.green,
+                      // dE: Colors.green,
+                      // eE: Colors.green,
+                      // iE: Colors.green,
+                      // gR: Colors.green,
+                      // eS: Colors.green,
+                      fR: Colors.green,
+                      hR: Colors.green,
+                      // iT: Colors.green,
+                      // cY: Colors.green,
+                      lV: Colors.green,
+                      // lT: Colors.green,
+                      // lU: Colors.green,
+                      // hU: Colors.green,
+                      // mT: Colors.green,
+                      nL: Colors.green,
+                      aT: Colors.green,
+                      // pL: Colors.green,
+                      // pT: Colors.green,
+                      // rO: Colors.green,
+                      // sI: Colors.green,
+                      // sK: Colors.green,
+                      fI: Colors.green,
+                      sE: Colors.green,
+                      // iS: Colors.green,
+                      // lI: Colors.green,
+                      nO: Colors.green,
+                      cH: Colors.green,
+                    ).toMap(),
+                  callback: (id, name, tapdetails) {
+                    setState(() {
+                      currentId = id;
+                    });
+                  },),
+                )
               ),
               Container(
                 margin: EdgeInsets.all(5.0),
@@ -732,7 +790,7 @@ class _MapOfEuropeNorwayState extends State<MapOfEuropeNorway> {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.fitHeight,
-                    image: AssetImage('assets/images/oslo1.png'),
+                    image: AssetImage('assets/images/${country.capital.toLowerCase()}1.png'),
                   ),
                 ),
               ),
@@ -748,7 +806,7 @@ class _MapOfEuropeNorwayState extends State<MapOfEuropeNorway> {
                       size: 26.0,
                     ),
                     Text(
-                      '${c.capital}, ${c.name}',
+                      '${country.capital}, ${country.name}',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 18.0,
@@ -766,7 +824,7 @@ class _MapOfEuropeNorwayState extends State<MapOfEuropeNorway> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => LocationInfoPage()),
+                            MaterialPageRoute(builder: (context) => LocationInfoPage(id: currentId,)),
                           );
                         },
                         child: Text(
@@ -858,17 +916,30 @@ class _MapOfEuropeNorwayState extends State<MapOfEuropeNorway> {
 }
 
 class LocationInfoPage extends StatefulWidget {
-  const LocationInfoPage({Key? key}) : super(key: key);
+  const LocationInfoPage({Key? key, required this.id}) : super(key: key);
+  final String id;
 
   @override
   State<LocationInfoPage> createState() => _LocationInfoPageState();
 }
 
 class _LocationInfoPageState extends State<LocationInfoPage> {
-  Country c = Country("Norway", "Oslo", "https://media.discordapp.net/attachments/1096092608415137792/1103513431174299728/image_1.png?width=333&height=592", Price.high, Temperature.cold, List.of([Language("Norwegian"), Language("English")]));
+  List<Country> countries = [
+    Country("be", "Belgium", "Brussels", Price.medium, Temperature.comfortable, List.of([Language("French"), Language("Dutch"), Language("English")])),
+    Country("se", "Sweden", "Stockholm", Price.high, Temperature.comfortable, List.of([Language("Swedish"), Language("English")])),
+    Country("no", "Norway", "Oslo", Price.high, Temperature.comfortable, List.of([Language("Norwegian"), Language("English")])),
+    Country("fr", "France", "Paris", Price.medium, Temperature.comfortable, List.of([Language("French"), Language("English")])),
+    Country("lv", "Latvia", "Riga", Price.low, Temperature.comfortable, List.of([Language("Latvian"), Language("Russian"), Language("English")])),
+    Country("fi", "Finland", "Helsinki", Price.medium, Temperature.comfortable, List.of([Language("Finnish")])),
+    Country("nl", "Netherlands", "Amsterdam", Price.high, Temperature.comfortable, List.of([Language("Dutch")])),
+    Country("ch", "Switzerland", "Bern", Price.high, Temperature.comfortable, List.of([Language("German"), Language("French")])),
+    Country("hr", "Croatia", "Zagreb", Price.medium, Temperature.comfortable, List.of([Language("Croatian")])),
+    Country("at", "Austria", "Vienna", Price.low, Temperature.comfortable, List.of([Language("German")])),
+  ];
 
   @override
   Widget build(BuildContext context) {
+    Country country = countries.firstWhere((element) => element.id == widget.id);
     return MaterialApp(
       title: 'Location Information',
       theme: new ThemeData(
@@ -902,7 +973,7 @@ class _LocationInfoPageState extends State<LocationInfoPage> {
                       ),
                     ),
                     Text(
-                      '${c.capital} is the capital of ${c.name}',
+                      'Capital: ${country.capital}',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20.0,
@@ -958,7 +1029,7 @@ class _LocationInfoPageState extends State<LocationInfoPage> {
                       ),
                     ),
                     Text(
-                      'Price: ${"\$" * (c.price.index + 1)}',
+                      'Price: ${"\$" * (country.price.index + 1)}',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20.0,
@@ -986,7 +1057,7 @@ class _LocationInfoPageState extends State<LocationInfoPage> {
                       ),
                     ),
                     Text(
-                      c.languages.map((e) => e.name).toList().join(", "),
+                      country.languages.map((e) => e.name).toList().join(", "),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20.0,
@@ -1014,7 +1085,7 @@ class _LocationInfoPageState extends State<LocationInfoPage> {
                       ),
                     ),
                     Text(
-                      '${c.capital} is usually ${c.temperature.name}',
+                      'Temperature is ${country.temperature.name}',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20.0,
@@ -1032,7 +1103,7 @@ class _LocationInfoPageState extends State<LocationInfoPage> {
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         fit: BoxFit.fitHeight,
-                        image: AssetImage('assets/images/oslo2.png'),
+                        image: AssetImage('assets/images/${country.capital.toLowerCase()}2.png'),
                       ),
                     ),
                   ),
@@ -1042,7 +1113,7 @@ class _LocationInfoPageState extends State<LocationInfoPage> {
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         fit: BoxFit.fitHeight,
-                        image: AssetImage('assets/images/oslo3.png'),
+                        image: AssetImage('assets/images/${country.capital.toLowerCase()}3.png'),
                       ),
                     ),
                   ),
