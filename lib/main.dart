@@ -20,10 +20,10 @@ class ExploreEurope extends StatelessWidget {
       theme: ThemeData(
           primarySwatch: Colors.blueGrey,
           textButtonTheme: TextButtonThemeData(
-              style: TextButton.styleFrom(backgroundColor: Color(0xFF4F6A84))
+              style: TextButton.styleFrom(backgroundColor: Colors.blueGrey)
           ),
           inputDecorationTheme: InputDecorationTheme(
-            fillColor: Color(0xFF4F6A84),
+            fillColor: Colors.blueGrey,
             filled: true,
           ),
       ),
@@ -58,8 +58,23 @@ class _MainPageState extends State<MainPage> {
         child: Center(
           child: Column(
             children: [
+              Container(
+                margin: EdgeInsets.all(30),
+                padding: EdgeInsets.all(8),
+                width: 330,
+                height: 80,
+                color: Colors.blueGrey,
+                child: Text(
+                  'Keep track of your adventure through the European continent, all while preparing for your next ones!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18.0,
+                  ),
+                ),
+              ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.6,
+                height: 300,
               ),
               TextButton(
                   onPressed: () {
@@ -69,11 +84,11 @@ class _MainPageState extends State<MainPage> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF4F6A84)
+                      backgroundColor: Colors.blueGrey
                   ),
                   child: Text(
-                    "Continue Your Adventure!",
-                    style: TextStyle(color: Colors.white60),
+                    "Continue Your Adventure and Login",
+                    style: TextStyle(color: Colors.white),
                   ),
               ),
               TextButton(
@@ -84,11 +99,11 @@ class _MainPageState extends State<MainPage> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF4F6A84)
+                      backgroundColor: Colors.blueGrey
                   ),
                   child: Text(
-                    "Start Your Adventure!",
-                    style: TextStyle(color: Colors.white60),
+                    "Start Your Adventure and Register",
+                    style: TextStyle(color: Colors.white),
                   ),
               ),
             ],
@@ -133,37 +148,45 @@ class _LoginPageState extends State<LoginPage> {
                 height: MediaQuery.of(context).size.height * 0.08,
               ),
               TextField(
-                  controller: usernameController,
-                  decoration: InputDecoration(
-                    hintText: "Enter Username",
-                  ),
+                style: TextStyle(color: Colors.white),
+                controller: usernameController,
+                decoration: InputDecoration(
+                  labelStyle: new TextStyle(color: Colors.white),
+                  labelText: 'Enter Username',
+                ),
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.03,
               ),
               TextField(
-                  controller: passwordController,
-                  decoration: InputDecoration(
-                    hintText: "Enter Password",
-                  ),
+                style: TextStyle(color: Colors.white),
+                controller: passwordController,
+                obscureText: true,
+                decoration: InputDecoration(
+                  labelStyle: new TextStyle(color: Colors.white),
+                  labelText: 'Enter Password',
+                ),
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.1,
               ),
               TextButton(
                   onPressed: () {
-                    if (usernameController.text == "norway_lover31" && passwordController.text == "123") {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const ProfilePage()),
-                      );
+                    if (usernameController.text == "s" && passwordController.text == "123") {
+                      setState(() {
+                        Navigator.pushReplacement(
+                            context,
+                            new MaterialPageRoute(
+                                builder: (BuildContext context) => ProfilePage()));
+                      });
                     } else
                       return;
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF4F6A84),
+                      backgroundColor: Colors.blueGrey
                   ),
-                  child: Text("Login"),
+                child: Text("Login", style: TextStyle(color: Colors.white),
+                ),
               ),
             ],
           ),
@@ -189,8 +212,6 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController fNameController = TextEditingController();
   TextEditingController lNameController = TextEditingController();
-  TextEditingController bankController = TextEditingController();
-  TextEditingController accNumController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -214,70 +235,68 @@ class _RegisterPageState extends State<RegisterPage> {
                 height: MediaQuery.of(context).size.height * 0.08,
               ),
               TextField(
+                  style: TextStyle(color: Colors.white),
                   controller: usernameController,
                   decoration: InputDecoration(
-                    hintText: "Enter Username",
+                    labelStyle: new TextStyle(color: Colors.white),
+                    labelText: 'Enter Username',
                   ),
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.03,
               ),
               TextField(
-                  controller: passwordController,
-                  decoration: InputDecoration(
-                    hintText: "Enter Password",
-                  ),
+                style: TextStyle(color: Colors.white),
+                obscureText: true,
+                controller: passwordController,
+                decoration: InputDecoration(
+                  labelStyle: new TextStyle(color: Colors.white),
+                  labelText: 'Enter Password',
+                ),
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.08,
               ),
               TextField(
-                  controller: fNameController,
-                  decoration: InputDecoration(
-                    hintText: "Enter First Name",
-                  ),
+                style: TextStyle(color: Colors.white),
+                controller: fNameController,
+                decoration: InputDecoration(
+                  labelStyle: new TextStyle(color: Colors.white),
+                  labelText: 'Enter First Name',
+                ),
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.03,
               ),
               TextField(
-                  controller: lNameController,
-                  decoration: InputDecoration(
-                    hintText: "Enter Last Name",
-                  ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.08,
-              ),
-              TextField(
-                  controller: bankController,
-                  decoration: InputDecoration(
-                    hintText: "Your Bank",
-                  ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.03,
-              ),
-              TextField(
-                  controller: accNumController,
-                  decoration: InputDecoration(
-                    hintText: "Account Number",
-                  ),
+                style: TextStyle(color: Colors.white),
+                controller: lNameController,
+                decoration: InputDecoration(
+                  labelStyle: new TextStyle(color: Colors.white),
+                  labelText: 'Enter Last Name',
+                ),
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.03,
               ),
               TextButton(
                   onPressed: () {
-                    Navigator.push(
+                    String username = usernameController.text;
+                    String password = passwordController.text;
+                    String first_name = fNameController.text;
+                    String last_name = lNameController.text;
+                    insert(username, password, first_name, last_name);
+
+                    /*Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => const LoginPage()),
-                    );
+                    );*/
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF4F6A84),
+                      backgroundColor: Colors.blueGrey,
                   ),
-                  child: Text("Register"),
+                  child: Text("Register", style: TextStyle(color: Colors.white),
+                  ),
               ),
             ],
           ),
@@ -286,16 +305,14 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  void _insert(username, password, first_name, last_name, bank_name, account_num) async {
+  void insert(username, password, first_name, last_name) async {
     Map<String, dynamic> row = {
       DatabaseHelper.columnUsername: username,
       DatabaseHelper.columnPassword: password,
       DatabaseHelper.columnFirstName: first_name,
-      DatabaseHelper.columnLastName: last_name,
-      DatabaseHelper.columnBankName: bank_name,
-      DatabaseHelper.columnAccountNum: account_num
+      DatabaseHelper.columnLastName: last_name
     };
-    User user = User.fromMap(row);
+    User user = User.firstFromMap(row);
     final id = await dbHelper.insert(user);
   }
 }
@@ -394,26 +411,6 @@ class _ProfilePageState extends State<ProfilePage> {
               color: Colors.white,
               thickness: 1,
             ),
-            Container(
-              margin: EdgeInsets.all(10),
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                  color: Colors.blueGrey,
-                  borderRadius: BorderRadius.all(Radius.circular(20))
-              ),
-              child: Center(
-                child: Column(
-                  children: <Widget>[
-                    Text('Your Bank: Scotia Bank', style: TextStyle(color: Colors.white, fontSize: 18)),
-                    Text('Account Number: **** **** **** 1820', style: TextStyle(color: Colors.white, fontSize: 18)),
-                  ],
-                ),
-              ),
-            ),
-            Divider(
-              color: Colors.white,
-              thickness: 1,
-            ),
             Expanded(
               child: Container(
                 margin: EdgeInsets.only(bottom: 10.0),
@@ -422,7 +419,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Container(
                     width: 200,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => EditProfilePage()),
+                        );
+                      },
                       child: Text('Edit Information'),
                     ),
                   ),
@@ -472,10 +474,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: ListTile(
                     leading: Icon(Icons.logout), title: Text('Logout'),
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => MainPage()),
-                      );
+                      setState(() {
+                        Navigator.pushReplacement(
+                            context,
+                            new MaterialPageRoute(
+                                builder: (BuildContext context) => LoginPage()));
+                      });
                     },
                   ),
                 ),
@@ -487,6 +491,102 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 }
+
+class EditProfilePage extends StatefulWidget {
+  const EditProfilePage({Key? key}) : super(key: key);
+
+  @override
+  State<EditProfilePage> createState() => _EditProfilePageState();
+}
+
+class _EditProfilePageState extends State<EditProfilePage> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Edit Profile',
+      theme: new ThemeData(
+          primarySwatch: Colors.blueGrey,
+          scaffoldBackgroundColor: const Color(0xFF887CA3)
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Edit Profile'),
+          centerTitle: true,
+        ),
+        body: Center(
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 20,
+              ),
+              CircleAvatar(
+                backgroundImage: AssetImage('assets/images/yelan.png'),
+                radius: 50,
+              ),
+              Container(
+                margin: EdgeInsets.all(20),
+                color: Colors.blueGrey,
+                child: TextField(
+                  style: TextStyle(color: Colors.white),
+                  decoration: new InputDecoration(
+                    border: const OutlineInputBorder(),
+                    labelStyle: new TextStyle(color: Colors.white),
+                    labelText: 'Enter your new username',
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(20),
+                color: Colors.blueGrey,
+                child: TextField(
+                  style: TextStyle(color: Colors.white),
+                  decoration: new InputDecoration(
+                    border: const OutlineInputBorder(),
+                    labelStyle: new TextStyle(color: Colors.white),
+                    labelText: 'Enter your new favorite country',
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(20),
+                color: Colors.blueGrey,
+                child: TextField(
+                  style: TextStyle(color: Colors.white),
+                  decoration: new InputDecoration(
+                    border: const OutlineInputBorder(),
+                    labelStyle: new TextStyle(color: Colors.white),
+                    labelText: 'Enter your next destination',
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.only(bottom: 10.0),
+                  child: Align(
+                    alignment: FractionalOffset.bottomCenter,
+                    child: Container(
+                      width: 200,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => EditProfilePage()),
+                          );
+                        },
+                        child: Text('Confirm Changes'),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 
 class MapOfEurope extends StatefulWidget {
   const MapOfEurope({Key? key}) : super(key: key);
@@ -575,10 +675,12 @@ class _MapOfEuropeState extends State<MapOfEurope> {
                   child: ListTile(
                     leading: Icon(Icons.logout), title: Text('Logout'),
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => MainPage()),
-                      );
+                      setState(() {
+                        Navigator.pushReplacement(
+                            context,
+                            new MaterialPageRoute(
+                                builder: (BuildContext context) => LoginPage()));
+                      });
                     },
                   ),
                 ),
@@ -625,9 +727,13 @@ class _MapOfEuropeNorwayState extends State<MapOfEuropeNorway> {
               ),
               Container(
                 margin: EdgeInsets.all(5.0),
-                height: 175,
-                child: Image(
-                    image: AssetImage('assets/images/oslo1.png')
+                width: 500,
+                height: 150,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.fitHeight,
+                    image: AssetImage('assets/images/oslo1.png'),
+                  ),
                 ),
               ),
               Container(
@@ -733,10 +839,12 @@ class _MapOfEuropeNorwayState extends State<MapOfEuropeNorway> {
                   child: ListTile(
                     leading: Icon(Icons.logout), title: Text('Logout'),
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => MainPage()),
-                      );
+                      setState(() {
+                        Navigator.pushReplacement(
+                            context,
+                            new MaterialPageRoute(
+                                builder: (BuildContext context) => LoginPage()));
+                      });
                     },
                   ),
                 ),
@@ -919,15 +1027,23 @@ class _LocationInfoPageState extends State<LocationInfoPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Container(
+                    width: 150,
                     height: 150,
-                    child: Image(
-                        image: AssetImage('assets/images/oslo2.png')
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.fitHeight,
+                        image: AssetImage('assets/images/oslo2.png'),
+                      ),
                     ),
                   ),
                   Container(
+                    width: 200,
                     height: 150,
-                    child: Image(
-                        image: AssetImage('assets/images/oslo3.png')
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.fitHeight,
+                        image: AssetImage('assets/images/oslo3.png'),
+                      ),
                     ),
                   ),
                 ],

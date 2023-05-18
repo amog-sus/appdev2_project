@@ -14,8 +14,8 @@ class DatabaseHelper {
   static final columnLastName = 'last_name';
   static final columnUsername = 'username';
   static final columnPassword = 'password';
-  static final columnBankName = 'bank_name';
-  static final columnAccountNum = 'account_num';
+  static final columnFavCountry = 'favCountry';
+  static final columnNextDestination = 'nextDestination';
   static final columnPassport = 'passport';
 
   DatabaseHelper._privateConstructor();
@@ -43,9 +43,9 @@ class DatabaseHelper {
             $columnLastName TEXT NOT NULL,
             $columnUsername TEXT NOT NULL,
             $columnPassword TEXT NOT NULL,
-            $columnBankName TEXT NOT NULL,
-            $columnAccountNum TEXT NOT NULL,
-            $columnPassport TEXT NOT NULL
+            $columnFavCountry TEXT NOT NULL,
+            $columnNextDestination TEXT NOT NULL,
+            $columnPassport
           )
           ''');
   }
@@ -53,7 +53,7 @@ class DatabaseHelper {
   // Inserts user
   Future<int> insert(User user) async {
     Database db = await instance.database;
-    return await db.insert(users_table, {'first_name': user.first_name, 'last_name': user.last_name});
+    return await db.insert(users_table, {'first_name': user.first_name, 'last_name': user.last_name, 'username': user.username, 'password': user.password, 'favCountry': user.favCountry, 'nextDestination': user.nextDestination, 'passport': user.passport});
   }
 
   // Count rows
