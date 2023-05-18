@@ -704,6 +704,21 @@ class MapOfEuropeNorway extends StatefulWidget {
 }
 
 class _MapOfEuropeNorwayState extends State<MapOfEuropeNorway> {
+  final viewTransformationController = TransformationController();
+
+  @override
+  void initState() {
+    final zoomFactor = 3.0;
+    final xTranslate = 450.0;
+    final yTranslate = 0.0;
+    viewTransformationController.value.setEntry(0, 0, zoomFactor);
+    viewTransformationController.value.setEntry(1, 1, zoomFactor);
+    viewTransformationController.value.setEntry(2, 2, zoomFactor);
+    viewTransformationController.value.setEntry(0, 3, -xTranslate);
+    viewTransformationController.value.setEntry(1, 3, -yTranslate);
+    super.initState();
+  }
+
   List<Country> countries = [
     Country("be", "Belgium", "Brussels", Price.medium, Temperature.comfortable, List.of([Language("French"), Language("Dutch"), Language("English")])),
     Country("se", "Sweden", "Stockholm", Price.high, Temperature.comfortable, List.of([Language("Swedish"), Language("English")])),
@@ -739,6 +754,7 @@ class _MapOfEuropeNorwayState extends State<MapOfEuropeNorway> {
                 margin: EdgeInsets.all(15.0),
                 color: Colors.white70,
                 child: InteractiveViewer(
+                  transformationController: viewTransformationController,
                   scaleEnabled: true,
                   maxScale: 75,
                   minScale: 5,
