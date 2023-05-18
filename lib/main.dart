@@ -6,6 +6,7 @@ import 'dart:async';
 import 'package:path/path.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:url_launcher/url_launcher.dart';
 import './user.dart';
 import './passport.dart';
 import './dbhelper.dart';
@@ -175,7 +176,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               TextButton(
                   onPressed: () {
-                    if (usernameController.text == "s" && passwordController.text == "123") {
+                    if (usernameController.text == "norway_lover31" && passwordController.text == "123") {
                       setState(() {
                         Navigator.pushReplacement(
                             context,
@@ -290,10 +291,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     String last_name = lNameController.text;
                     insert(username, password, first_name, last_name);
 
-                    /*Navigator.push(
+                    Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => const LoginPage()),
-                    );*/
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blueGrey,
@@ -463,12 +464,6 @@ class _ProfilePageState extends State<ProfilePage> {
                     context,
                     MaterialPageRoute(builder: (context) => MapOfEurope()),
                   );
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.hiking), title: Text('Past Adventures'),
-                onTap: () {
-                  Navigator.pop(context);
                 },
               ),
               Expanded(
@@ -666,12 +661,6 @@ class _MapOfEuropeState extends State<MapOfEurope> {
                   );
                 },
               ),
-              ListTile(
-                leading: Icon(Icons.hiking), title: Text('Past Adventures'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
               Expanded(
                 child: Align(
                   alignment: FractionalOffset.bottomCenter,
@@ -730,6 +719,7 @@ class _MapOfEuropeNorwayState extends State<MapOfEuropeNorway> {
     Country("ch", "Switzerland", "Bern", Price.high, Temperature.comfortable, List.of([Language("German"), Language("French")])),
     Country("hr", "Croatia", "Zagreb", Price.medium, Temperature.comfortable, List.of([Language("Croatian")])),
     Country("at", "Austria", "Vienna", Price.low, Temperature.comfortable, List.of([Language("German")])),
+
   ];
   String currentId = "se";
 
@@ -854,15 +844,10 @@ class _MapOfEuropeNorwayState extends State<MapOfEuropeNorway> {
                     margin: EdgeInsets.only(left: 25, right: 5, top: 5, bottom: 5),
                     child: Expanded(
                       child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => MapOfEuropeNorway()),
-                          );
-                        },
-                        child: Text(
-                          'Book A Stay',
-                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        onPressed: () {},
+                        child: InkWell(
+                            child: new Text('Book A Stay', style: TextStyle(color: Colors.white, fontSize: 16),),
+                            onTap: () => launch('https://www.trivago.ca/en-CA')
                         ),
                       ),
                     ),
@@ -901,12 +886,6 @@ class _MapOfEuropeNorwayState extends State<MapOfEuropeNorway> {
                   );
                 },
               ),
-              ListTile(
-                leading: Icon(Icons.hiking), title: Text('Past Adventures'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
               Expanded(
                 child: Align(
                   alignment: FractionalOffset.bottomCenter,
@@ -942,15 +921,19 @@ class LocationInfoPage extends StatefulWidget {
 class _LocationInfoPageState extends State<LocationInfoPage> {
   List<Country> countries = [
     Country("be", "Belgium", "Brussels", Price.medium, Temperature.comfortable, List.of([Language("French"), Language("Dutch"), Language("English")])),
-    Country("se", "Sweden", "Stockholm", Price.high, Temperature.comfortable, List.of([Language("Swedish"), Language("English")])),
-    Country("no", "Norway", "Oslo", Price.high, Temperature.comfortable, List.of([Language("Norwegian"), Language("English")])),
-    Country("fr", "France", "Paris", Price.medium, Temperature.comfortable, List.of([Language("French"), Language("English")])),
-    Country("lv", "Latvia", "Riga", Price.low, Temperature.comfortable, List.of([Language("Latvian"), Language("Russian"), Language("English")])),
-    Country("fi", "Finland", "Helsinki", Price.medium, Temperature.comfortable, List.of([Language("Finnish")])),
+    Country("se", "Sweden", "Stockholm", Price.high, Temperature.cold, List.of([Language("Swedish"), Language("English")])),
+    Country("no", "Norway", "Oslo", Price.high, Temperature.cold, List.of([Language("Norwegian"), Language("English")])),
+    Country("fr", "France", "Paris", Price.medium, Temperature.warm, List.of([Language("French"), Language("English")])),
+    Country("lv", "Latvia", "Riga", Price.low, Temperature.cold, List.of([Language("Latvian"), Language("Russian"), Language("English")])),
+    Country("fi", "Finland", "Helsinki", Price.medium, Temperature.cold, List.of([Language("Finnish")])),
     Country("nl", "Netherlands", "Amsterdam", Price.high, Temperature.comfortable, List.of([Language("Dutch")])),
     Country("ch", "Switzerland", "Bern", Price.high, Temperature.comfortable, List.of([Language("German"), Language("French")])),
-    Country("hr", "Croatia", "Zagreb", Price.medium, Temperature.comfortable, List.of([Language("Croatian")])),
+    Country("hr", "Croatia", "Zagreb", Price.medium, Temperature.warm, List.of([Language("Croatian")])),
     Country("at", "Austria", "Vienna", Price.low, Temperature.comfortable, List.of([Language("German")])),
+    Country("at", "Germany", "Berlin", Price.medium, Temperature.comfortable, List.of([Language("German")])),
+    Country("at", "Poland", "Warsaw", Price.low, Temperature.comfortable, List.of([Language("Polish")])),
+    Country("at", "Romania", "Bucharest", Price.low, Temperature.warm, List.of([Language("Romanian")])),
+    Country("at", "Spain", "Madrid", Price.low, Temperature.warm, List.of([Language("Spanish")])),
   ];
 
   @override
@@ -990,34 +973,6 @@ class _LocationInfoPageState extends State<LocationInfoPage> {
                     ),
                     Text(
                       'Capital: ${country.capital}',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white),
-                  color: Colors.blueGrey,
-                ),
-                width: 330,
-                height: 50,
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.all(8),
-                      child: Icon(
-                        Icons.access_time_rounded,
-                        color: Colors.white,
-                        size: 28.0,
-                      ),
-                    ),
-                    Text(
-                      'GMT +2',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20.0,

@@ -56,6 +56,12 @@ class DatabaseHelper {
     return await db.insert(users_table, {'first_name': user.first_name, 'last_name': user.last_name, 'username': user.username, 'password': user.password, 'favCountry': user.favCountry, 'nextDestination': user.nextDestination, 'passport': user.passport});
   }
 
+  // Get all rows
+  Future<List<Map<String, dynamic>>> queryAllRows() async {
+    Database db = await instance.database;
+    return await db.query(users_table);
+  }
+
   // Count rows
   Future<int?> queryRowCount() async {
     Database db = await instance.database;
